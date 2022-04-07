@@ -30,5 +30,7 @@ namespace Supermarket.Data.Models
         public string ImageUrl { get; set; }
 
         public int Availability { get; set; } = 0;
+        [StringLength(500)]
+        public string Description { get; set; }
     }
 }
