@@ -21,16 +21,16 @@ namespace Supermarket.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateRole(ProjectRole role)
-        {
-            var roleExist = await roleManager.RoleExistsAsync(role.RoleName);
+        //[HttpPost]
+        //public async Task<IActionResult> CreateRole(ProjectRole role)
+        //{
+        //    var roleExist = await roleManager.RoleExistsAsync(role.RoleName);
 
-            if (!roleExist)
-            {
-                var result = await roleManager.CreateAsync(new IdentityRole(role.RoleName));
-            }
-            return View();
-        }
+        //    if (!roleExist)
+        //    {
+        //        var result = await roleManager.CreateAsync(new IdentityRole(role.RoleName));
+        //    }
+        //    return View();
+        //}
     }
 }

@@ -19,5 +19,7 @@ namespace Supermarket.Data
         public DbSet<Cart> Carts { get; set; }
 
         public DbSet<WishList> WishLists { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
     }
 }

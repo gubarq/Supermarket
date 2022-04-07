@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="zxx">
 
 <head>
@@ -41,7 +44,16 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
                             <div class="header__top__right__auth">
-                                <a href="~/Identity/Account/Login"><i class="fa fa-user"></i> Login</a>
+                                @if(SignInManager.IsSignedIn(User))
+                                {
+                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button type="submit" class="fa fa-user">Logout</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <a href="~/Identity/Account/Login"><i class="fa fa-user"></i> Login</a>
+                                }
                             </div>
                         </div>
                     </div>
@@ -60,8 +72,8 @@
                         <ul>
                             <li class="active"><a href="\">Home</a></li>
                             <li><a href="~/Shop/ShopGrid">Shop</a></li>
-                            <li><a href="~/Blog/BlogGrid">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="~/Shop/BlogGrid">Blog</a></li>
+                            <li><a href="~/Shop/Contact">Contact</a></li>
                             @if (User.IsInRole("Admin"))
                             {
                              <li><a href="~/Shop/ShopGrid">Admin Menu</a></li>

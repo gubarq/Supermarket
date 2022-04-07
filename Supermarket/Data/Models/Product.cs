@@ -29,6 +29,6 @@ namespace Supermarket.Data.Models
         [Required]
         public string ImageUrl { get; set; }
 
-        public int? Availability { get; set; }
+        public int Availability { get; set; } = 0;
     }
 }
