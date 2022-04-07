@@ -23,7 +23,7 @@ namespace Supermarket.Data.Models
         [StringLength(40)]
         public string Name { get; set; }
         [Required]
-        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
         [Range(0,1000)]
         public decimal Price { get; set; }
         [Required]
