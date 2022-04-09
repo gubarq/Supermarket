@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Supermarket.Database;
+using Supermarket.Database.Entities.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,37 +10,42 @@ using System.Threading.Tasks;
 namespace Supermarket.Data.Common
 {
     internal class Repository<T> : IRepository<T>
+        where T : BaseEntity
     {
-        private readonly DbContext dbContext;
+        private readonly ApplicationDbContext _context;
 
         public Repository(ApplicationDbContext context)
         {
-            dbContext = context;
+            _context = context;
         }
 
-        public void Add<T>(T entity) where T : class
+        public async Task CreateOrUpdateAsync(T entity)
         {
-            DbSet<T>().Add(entity);
+            if (entity.Id == default)
+            {
+                entity.Id = Guid.NewGuid();
+                entity.CreatedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                entity.UpdatedAt = DateTime.UtcNow;
+            }
+            
+            await _context.SaveChangesAsync();
         }
 
-        public IQueryable<T> All<T>() where T : class
+        public async Task DeleteAsync(T entity)
         {
-            return DbSet<T>().AsQueryable();
+            var dbEntity = await GetByIdAsync(entity.Id);
+            _context.Remove(dbEntity);
+
+            await _context.SaveChangesAsync();
         }
 
-        public void Remove<T>(T entity) where T : class
-        {
-            DbSet<T>().Remove(entity);
-        }
+        public IQueryable<T> GetQuery()
+            => _context.Set<T>();
 
-        public int SaveChanges()
-        {
-            return dbContext.SaveChanges();
-        }
-
-        private DbSet<T> DbSet<T>() where T : class
-        {
-            return dbContext.Set<T>();
-        }
+        public async Task<T> GetByIdAsync(Guid id)
+            => await _context.Set<T>().FindAsync(id);
     }
 }

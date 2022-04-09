@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Supermarket.Data.Common
+﻿namespace Supermarket.Data.Common
 {
     public interface IRepository<T>
     {
-        void Add<T>(T entity) where T : class;
-
-        IQueryable<T> All<T>() where T : class;
-
-        int SaveChanges();
-
-        void Remove<T>(T entity) where T : class;
+        Task<T> GetByIdAsync(Guid id);
+        IQueryable<T> GetQuery();
+        
+        Task CreateOrUpdateAsync(T entity);
+        Task DeleteAsync(T entity);
     }
 }

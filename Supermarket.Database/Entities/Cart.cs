@@ -12,13 +12,10 @@ namespace Supermarket.Database.Entities
         public decimal TotalPrice { get; set; }
         public int? NumberOfProducts { get; set; }
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public List<Product> Products { get; set; }
 
         public string UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
+
         public IdentityUser User { get; set; }
-
-
-
     }
 }

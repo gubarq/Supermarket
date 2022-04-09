@@ -9,6 +9,6 @@ namespace Supermarket.Database.Entities
         [StringLength(80)]
         public string Name { get; set; }
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public List<Product> Products { get; set; }
     }
 }
