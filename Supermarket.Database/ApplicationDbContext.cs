@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Supermarket.Data.Models;
+using Supermarket.Database.Entities;
 
-namespace Supermarket.Data
+namespace Supermarket.Database
 {
     public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
         }
 
         public DbSet<Category> Categories { get; set; }

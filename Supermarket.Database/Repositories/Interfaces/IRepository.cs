@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Data.Common
 {
-    public interface IRepository
+    public interface IRepository<T>
     {
         void Add<T>(T entity) where T : class;
 

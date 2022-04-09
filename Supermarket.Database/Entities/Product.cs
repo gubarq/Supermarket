@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Supermarket.Database.Entities.Base;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Supermarket.Data.Models
-{ 
-    public class Product
+namespace Supermarket.Database.Entities
+{
+    public class Product : BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
-        
         [Required]
         public Guid CategoryId { get; set; }
-        
+
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; }
 
@@ -24,7 +17,7 @@ namespace Supermarket.Data.Models
         public string Name { get; set; }
         [Required]
         [Column(TypeName = "money")]
-        [Range(0,1000)]
+        [Range(0, 1000)]
         public decimal Price { get; set; }
         [Required]
         public string ImageUrl { get; set; }

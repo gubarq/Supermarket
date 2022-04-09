@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Supermarket.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Data.Common
 {
-    internal class Repository : IRepository
+    internal class Repository<T> : IRepository<T>
     {
         private readonly DbContext dbContext;
 
