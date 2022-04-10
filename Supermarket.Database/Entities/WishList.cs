@@ -7,14 +7,15 @@ namespace Supermarket.Database.Entities
 {
     public class WishList : BaseEntity
     {
+        public WishList()
+        {
+            Products = new();
+        }
+
         [Required]
         [Column(TypeName = "money")]
         public decimal TotalPrice { get; set; }
 
-        public ICollection<Product> Products { get; set; }
-
-        public string UserId { get; set; }
-        public IdentityUser User { get; set; }
-
+        public virtual List<Product> Products { get; set; }
     }
 }

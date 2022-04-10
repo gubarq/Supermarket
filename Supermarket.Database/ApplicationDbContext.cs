@@ -4,7 +4,7 @@ using Supermarket.Database.Entities;
 
 namespace Supermarket.Database
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -15,10 +15,10 @@ namespace Supermarket.Database
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<Cart> Carts { get; set; }
-
         public DbSet<WishList> WishLists { get; set; }
 
         public DbSet<Order> Orders { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }

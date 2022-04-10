@@ -6,9 +6,14 @@ namespace Supermarket.Database.Entities
 {
     public class Product : BaseEntity
     {
+        public Product()
+        {
+            Orders = new();
+        }
+
         [Required]
         public Guid CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         [Required]
         [StringLength(40)]
@@ -25,5 +30,7 @@ namespace Supermarket.Database.Entities
 
         [StringLength(500)]
         public string Description { get; set; }
+
+        public virtual List<Order> Orders { get; set; }
     }
 }
