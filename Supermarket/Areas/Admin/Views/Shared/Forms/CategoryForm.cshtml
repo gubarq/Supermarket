@@ -1,19 +1,17 @@
 ﻿@model Category
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
+    var disabled = ViewData["disabled"] as bool?;
 }
 
 
 <div class="form-group">
     <label asp-for="@Model.Name">Name</label>
     <span asp-validation-for="@Model.Name" class="text-danger"></span>
-    <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Name">
+    <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Name" disabled="@(disabled ?? false)">    
 </div>
 <div class="form-check form-check-inline">
     <label asp-for="@Model.IsFeatured">Is Featured</label>
     <span asp-validation-for="@Model.IsFeatured" class="text-danger"></span>
-    <input asp-for="@Model.IsFeatured" class="form-check-input" type="checkbox" value="featured">
+    <input asp-for="@Model.IsFeatured" class="form-check-input" type="checkbox" value="featured" disabled="@(disabled ?? false)">
 </div>

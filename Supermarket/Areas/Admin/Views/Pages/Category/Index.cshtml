@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Product list";
+    ViewData["Title"] = "Product List";
     List<Category> categories = ViewBag.Categories;
 }
 
@@ -11,6 +11,7 @@
             <td>Name</td>
             <td>Products</td>
             <td>Is Featured</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,11 @@
                     <td>@category.Name</td>
                     <td>@category.Products.Count</td>
                     <td>@(category.IsFeatured ? "yes" : "no")</td>
+                    <td>
+                        <a href="~/Admin/Category/Update/@(category.Id)" class="primary-btn" style="text-align:center;">Edit</a>
+                        <a href="~/Admin/Category/Delete/@(category.Id)" class="primary-btn" style="text-align:center;">Delete</a>
+                        <a href="~/Admin/Category/Details/@(category.Id)" class="primary-btn" style="text-align:center;">Details</a>
+                    </td>
                 </tr>
             }
     </tbody>

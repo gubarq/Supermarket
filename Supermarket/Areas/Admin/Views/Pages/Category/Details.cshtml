@@ -1,0 +1,7 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<partial name="~/Areas/Admin/Views/Shared/Forms/CategoryForm.cshtml" view-data='@new ViewDataDictionary(ViewData) { { "disabled", true } }'></partial>

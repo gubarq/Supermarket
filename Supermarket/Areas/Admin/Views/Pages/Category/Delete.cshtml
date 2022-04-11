@@ -1,0 +1,11 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Category Delete";
+}
+
+<form method="post">
+    <partial name="~/Areas/Admin/Views/Shared/Forms/CategoryForm.cshtml" view-data='@new ViewDataDictionary(ViewData) { { "disabled", true } }'></partial>
+
+    <button class="primary-btn w-100 text-center">Delete</button>
+</form>

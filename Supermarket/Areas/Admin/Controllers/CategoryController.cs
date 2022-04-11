@@ -22,9 +22,10 @@ namespace Supermarket.Web.Controllers.Admin
         }
 
         // GET: CategoryController/Details/5
-        public ActionResult Details(Guid id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            return View();
+            var category = await _categoryService.GetByIdAsync(id);
+            return View(category);
         }
 
         // GET: CategoryController/Create
@@ -46,6 +47,12 @@ namespace Supermarket.Web.Controllers.Admin
                     IsFeatured = collection["isfeatured"].Contains("featured")
                 };
 
+                ModelState.ClearValidationState(nameof(Category));
+                if (!TryValidateModel(category, nameof(Category)))
+                {
+                    return View();
+                }
+
                 await _categoryService.CreateAsync(category);
 
                 return RedirectToAction(nameof(Index));
@@ -56,19 +63,33 @@ namespace Supermarket.Web.Controllers.Admin
             }
         }
 
-        // GET: CategoryController/Edit/5
-        public ActionResult Edit(Guid id)
+        // GET: CategoryController/Update/5
+        public async Task<ActionResult> Update(Guid id)
         {
-            return View();
+            var category = await _categoryService.GetByIdAsync(id);
+            return View(category);
         }
 
-        // POST: CategoryController/Edit/5
+        // POST: CategoryController/Update/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid id, IFormCollection collection)
+        public async Task<ActionResult> Update(Guid id, IFormCollection collection)
         {
             try
             {
+                var category = await _categoryService.GetByIdAsync(id);
+
+                category.Name = collection["name"];
+                category.IsFeatured = collection["isfeatured"].Contains("featured");
+
+                ModelState.ClearValidationState(nameof(Category));
+                if (!TryValidateModel(category, nameof(Category)))
+                {
+                    return View();
+                }
+
+                await _categoryService.UpdateAsync(category);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -78,18 +99,22 @@ namespace Supermarket.Web.Controllers.Admin
         }
 
         // GET: CategoryController/Delete/5
-        public ActionResult Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            return View();
+            var category = await _categoryService.GetByIdAsync(id);
+            return View(category);
         }
 
         // POST: CategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Guid id, IFormCollection collection)
+        public async Task<ActionResult> Delete(Guid id, IFormCollection collection)
         {
             try
             {
+                var category = await _categoryService.GetByIdAsync(id);
+                await _categoryService.DeleteAsync(category);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

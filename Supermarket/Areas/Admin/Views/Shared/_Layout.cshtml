@@ -130,6 +130,7 @@
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/main.js"></script>
     <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     @await RenderSectionAsync("Scripts", false)
 </body>
 

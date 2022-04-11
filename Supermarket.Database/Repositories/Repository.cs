@@ -19,13 +19,13 @@ namespace Supermarket.Database.Repositories
             {
                 entity.Id = Guid.NewGuid();
                 entity.CreatedAt = DateTime.UtcNow;
+                await _context.AddAsync(entity);
             }
             else
             {
                 entity.UpdatedAt = DateTime.UtcNow;
             }
 
-            await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 

@@ -1,33 +1,51 @@
 ﻿@model Product
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
+    var disabled = ViewData["disabled"] as bool?;
 }
 
 <div class="form-group">
     <label asp-for="@Model.Name">Name</label>
-     <span asp-validation-for="@Model.Name" class="text-danger"></span>
-    <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Name">
+    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Name" disabled="@(disabled ?? false)">
 </div>
 <div class="form-group">
     <label asp-for="@Model.Quantity">Quantity</label>
      <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
-    <input asp-for="@Model.Quantity" type="number" class="form-control" placeholder="Quantity">
+    <input asp-for="@Model.Quantity" type="number" class="form-control" placeholder="Quantity" disabled="@(disabled ?? false)">
 </div>
 <div class="form-group">
     <label asp-for="@Model.Price">Price</label>
      <span asp-validation-for="@Model.Price" class="text-danger"></span>
-    <input asp-for="@Model.Price" type="number" class="form-control" placeholder="Price">
+    <input asp-for="@Model.Price" type="number" class="form-control" placeholder="Price" disabled="@(disabled ?? false)">
 </div>
 <div class="form-group">
     <label asp-for="@Model.ImageUrl">Image Url</label>
-     <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
-    <input asp-for="@Model.ImageUrl" type="text" class="form-control" placeholder="Image Url">
+    <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+    <input asp-for="@Model.ImageUrl" type="text" class="form-control" placeholder="Image Url" disabled="@(disabled ?? false)">
+</div>
+<div class="form-group">
+    <label asp-for="@Model.CategoryId">Category</label>
+    <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+
+    @if(disabled ?? false){
+        <input value="@(Model.Category.Name)" type="text" class="form-control" placeholder="Image Url" disabled="@(disabled ?? false)">
+    }
+    else {
+        <select asp-for="@Model.CategoryId" class="form-select w-100">
+            <option selected>Select a category</option>
+            @foreach(var category in ViewBag.Categories as List<Category> ?? new List<Category>())
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+            else {
+                <option>No categories</option>
+            }
+        </select>
+    }
 </div>
 <div class="form-group">
     <label asp-for="@Model.Description">Description</label>
      <span asp-validation-for="@Model.Description" class="text-danger"></span>
-    <textarea asp-for="@Model.Description" class="form-control" rows="3"></textarea>
+     <textarea asp-for="@Model.Description" class="form-control" rows="3" disabled="@(disabled ?? false)"></textarea>
 </div>

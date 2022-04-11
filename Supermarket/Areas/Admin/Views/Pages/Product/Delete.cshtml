@@ -1,0 +1,11 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Product Delete";
+}
+
+<form method="post">
+    <partial name="~/Areas/Admin/Views/Shared/Forms/ProductForm.cshtml" view-data='@new ViewDataDictionary(ViewData) { { "disabled", true } }'></partial>
+
+    <button class="primary-btn w-100 text-center">Delete</button>
+</form>
