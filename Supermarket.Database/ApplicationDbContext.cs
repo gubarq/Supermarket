@@ -19,6 +19,8 @@ namespace Supermarket.Database
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+
         public DbSet<User> Users { get; set; }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace Supermarket.Constants
+﻿namespace Supermarket.Shared.Constants
 {
-    public class FormatingConstant
+    public static class FormatingConstants
     {
         public const string DateFormat = "dd.MM.yyyy";
     }

@@ -77,7 +77,7 @@
                             <li><a href="~/Shop/Contact">Contact</a></li>
                             @if (User.IsInRole("Admin"))
                             {
-                             <li><a href="~/Shop/ShopGrid">Admin Menu</a></li>
+                             <li><a href="~/Admin">Admin</a></li>
                             }
                         </ul>
                     </nav>
@@ -148,7 +148,6 @@
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/main.js"></script>
     @await RenderSectionAsync("Scripts", false)
-
 </body>
 
 </html>

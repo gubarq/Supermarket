@@ -14,6 +14,8 @@ namespace Supermarket.Database.Entities
         [StringLength(80)]
         public string Name { get; set; }
 
+        public bool IsFeatured { get; set; }
+
         public virtual List<Product> Products { get; set; }
     }
 }

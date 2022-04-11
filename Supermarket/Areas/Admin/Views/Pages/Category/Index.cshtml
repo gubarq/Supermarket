@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Product list";
+    List<Category> categories = ViewBag.Categories;
+}
+
+<a href="~/Admin/Category/Create" class="primary-btn w-100" style="margin-bottom:2em; text-align:center;">Create a new category</a>
+
+<table id="table" class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Products</td>
+            <td>Is Featured</td>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach(var category in categories)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Products.Count</td>
+                    <td>@(category.IsFeatured ? "yes" : "no")</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready( function () {
+            $('#table').DataTable();
+        });
+    </script>
+}

@@ -26,7 +26,7 @@ namespace Supermarket.Database.Entities
         [Required]
         public string ImageUrl { get; set; }
 
-        public int Availability { get; set; } = 0;
+        public int Quantity { get; set; } = 0;
 
         [StringLength(500)]
         public string Description { get; set; }

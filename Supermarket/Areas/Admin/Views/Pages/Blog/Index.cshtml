@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Product list";
+    List<Product> products = ViewBag.Products;
+}
+
+<a href="~/Admin/Product/Create" class="primary-btn w-100" style="margin-bottom:2em; text-align:center;">Create a new product</a>
+
+<table id="table" class="table">
+    <thead>
+        <tr>
+            <td></td>
+            <td>Category</td>
+            <td>Name</td>
+            <td>Quantity</td>
+            <td>Price</td>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach(var product in products)
+            {
+                <tr>
+                    <td><img src="@product.ImageUrl" height="50" width="50"/></td>
+                    <td>@product.Category</td>
+                    <td>@product.Name</td>
+                    <td>@product.Quantity</td>
+                    <td>@product.Price</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready( function () {
+            $('#table').DataTable();
+        });
+    </script>
+}

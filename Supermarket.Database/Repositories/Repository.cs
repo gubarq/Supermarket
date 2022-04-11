@@ -1,15 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Supermarket.Database;
-using Supermarket.Database.Entities.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Supermarket.Database.Entities.Base;
+using Supermarket.Database.Repositories.Interfaces;
 
-namespace Supermarket.Data.Common
+namespace Supermarket.Database.Repositories
 {
-    internal class Repository<T> : IRepository<T>
+    public class Repository<T> : IRepository<T>
         where T : BaseEntity
     {
         private readonly ApplicationDbContext _context;
@@ -30,7 +24,8 @@ namespace Supermarket.Data.Common
             {
                 entity.UpdatedAt = DateTime.UtcNow;
             }
-            
+
+            await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 

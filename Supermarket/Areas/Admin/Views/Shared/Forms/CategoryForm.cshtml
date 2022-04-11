@@ -1,0 +1,19 @@
+﻿@model Category
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="form-group">
+    <label asp-for="@Model.Name">Name</label>
+    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Name">
+</div>
+<div class="form-check form-check-inline">
+    <label asp-for="@Model.IsFeatured">Is Featured</label>
+    <span asp-validation-for="@Model.IsFeatured" class="text-danger"></span>
+    <input asp-for="@Model.IsFeatured" class="form-check-input" type="checkbox" value="featured">
+</div>

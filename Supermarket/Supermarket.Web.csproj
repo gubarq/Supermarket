@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Supermarket.Core\Supermarket.Core.csproj" />
     <ProjectReference Include="..\Supermarket.Database\Supermarket.Database.csproj" />
+    <ProjectReference Include="..\Supermarket.Shared\Supermarket.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

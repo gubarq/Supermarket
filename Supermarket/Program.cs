@@ -1,10 +1,15 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
-using Supermarket.Constants;
+using Supermarket.Core.Services.EntityServices;
+using Supermarket.Core.Services.EntityServices.Interfaces;
 using Supermarket.Core.Services.HostedServices;
 using Supermarket.Database;
 using Supermarket.Database.Entities;
+using Supermarket.Database.Repositories;
+using Supermarket.Database.Repositories.Interfaces;
 using Supermarket.ModelBinders;
+using Supermarket.Shared.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,12 +31,28 @@ builder.Services.AddIdentity<User, IdentityRole>(options => {
     .AddDefaultTokenProviders()
     .AddDefaultUI();
 
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+builder.Services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+
 builder.Services.AddHostedService<SeedingService>();
+
+builder.Services.Configure<RazorViewEngineOptions>(options =>
+{
+    options.AreaViewLocationFormats.Clear();
+    options.AreaViewLocationFormats.Add("/Areas/{2}/Views/Pages/{1}/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("/Areas/{2}/Views/Shared/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("/Areas/Shop/Views/Pages/{0}.cshtml");
+});
+
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
         options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-        options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormatingConstant.NormalDateFormat));
+        options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormatingConstants.DateFormat));
         options.ModelBinderProviders.Insert(2, new DoubleModelBinderProvider());
     });
 
@@ -61,8 +82,20 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+
+app.MapAreaControllerRoute(
+    name: "admin",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+
+app.MapAreaControllerRoute(
     name: "default",
+    areaName: "Shop",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();
