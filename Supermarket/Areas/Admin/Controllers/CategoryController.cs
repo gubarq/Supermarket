@@ -44,7 +44,8 @@ namespace Supermarket.Web.Controllers.Admin
                 var category = new Category()
                 {
                     Name = collection["name"],
-                    IsFeatured = collection["isfeatured"].Contains("featured")
+                    IsFeatured = collection["isfeatured"].Contains("featured"),
+                    ImageUrl = collection["imageurl"],
                 };
 
                 ModelState.ClearValidationState(nameof(Category));
@@ -81,6 +82,7 @@ namespace Supermarket.Web.Controllers.Admin
 
                 category.Name = collection["name"];
                 category.IsFeatured = collection["isfeatured"].Contains("featured");
+                category.ImageUrl = collection["imageurl"];
 
                 ModelState.ClearValidationState(nameof(Category));
                 if (!TryValidateModel(category, nameof(Category)))

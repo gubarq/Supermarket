@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Elite Index";
+    List<Category> categories = ViewBag.Categories;
 }
 
 <div id="preloder">
@@ -17,16 +18,10 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruits</a></li>
-                            <li><a href="#">Packed Foods</a></li>
-                            <li><a href="#">Drinks</a></li>
-                            <li><a href="#">Cosmetics</a></li>
-                            <li><a href="#">Frozen Foods</a></li>
-                            <li><a href="#">Alcohol</a></li>
-                            <li><a href="#">Bio Foods</a></li>
-                            <li><a href="#">Cleanness</a></li>
+                        @foreach(var category in categories)
+                        {
+                            <li><a href="~/ShopGrid/@category.Name">@category.Name</a></li>    
+                        }
                         </ul>
                     </div>
                 </div>
@@ -47,7 +42,7 @@
                             <span>FRUIT FRESH</span>
                             <h2>Vegetable <br />100% Organic</h2>
                             <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            <a href="~/ShopGrid/Fruit" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
                 </div>

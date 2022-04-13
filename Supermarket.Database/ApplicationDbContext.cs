@@ -21,6 +21,13 @@ namespace Supermarket.Database
 
         public DbSet<OrderProduct> OrderProducts { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public override DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
+
+            base.OnModelCreating(builder);
+        }
     }
 }

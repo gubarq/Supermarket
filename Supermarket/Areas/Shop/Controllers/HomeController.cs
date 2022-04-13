@@ -1,24 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Supermarket.Core.Services.EntityServices.Interfaces;
 using System.Diagnostics;
 
 namespace Supermarket.Web.Controllers.Shop
 {
     public class HomeController : BaseShopController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICategoryService categoryService, IProductService productService)
         {
-            _logger = logger;
+            _categoryService = categoryService;
+            _productService = productService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.Categories = await _categoryService.GetAllAsync();
+
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> ShopGrid(string categoryName)
         {
+            var products = await _productService.GetByCategoryNameAsync(categoryName);
+
+            ViewBag.Products = products;
+
             return View();
         }
     }

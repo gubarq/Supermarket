@@ -24,7 +24,7 @@ namespace Supermarket.Core.Services.EntityServices
         public virtual async Task DeleteAsync(T entity)
             => await _repository.DeleteAsync(entity);
 
-        public virtual async Task<List<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
             => await _repository.GetQuery().ToListAsync();
 
         public virtual async Task<T> GetByIdAsync(Guid id)

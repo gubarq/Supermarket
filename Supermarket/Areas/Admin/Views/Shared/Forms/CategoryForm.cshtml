@@ -10,6 +10,11 @@
     <span asp-validation-for="@Model.Name" class="text-danger"></span>
     <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Name" disabled="@(disabled ?? false)">    
 </div>
+<div class="form-group">
+    <label asp-for="@Model.ImageUrl">Image Url</label>
+    <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+    <input asp-for="@Model.ImageUrl" type="text" class="form-control" placeholder="Image Url" disabled="@(disabled ?? false)">
+</div>
 <div class="form-check form-check-inline">
     <label asp-for="@Model.IsFeatured">Is Featured</label>
     <span asp-validation-for="@Model.IsFeatured" class="text-danger"></span>

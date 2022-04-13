@@ -10,8 +10,11 @@ namespace Supermarket.Core.Services.EntityServices
         public ProductService(IRepository<Product> repository) : base(repository)
         { }
 
-        public override async Task<List<Product>> GetAllAsync()
+        public override async Task<IEnumerable<Product>> GetAllAsync()
             => await _repository.GetQuery().Include(p => p.Category).ToListAsync();
+
+        public async Task<IEnumerable<Product>> GetByCategoryNameAsync(string name)
+            => await _repository.GetQuery().Include(p => p.Category).Where(p => p.Category.Name == name).ToListAsync();
 
         public override async Task<Product> GetByIdAsync(Guid id)
             => await _repository.GetQuery().Where(p => p.Id == id).Include(p => p.Category).FirstAsync();
