@@ -24,10 +24,14 @@ namespace Supermarket.Core.Services.ActionServices
             var genericTypeMappingProviderType = typeof(IMappingProvider<,>).GetGenericTypeDefinition();
             var createMappingMethod = genericTypeMappingProviderType.GetMethod("CreateMap");
 
-            foreach (var mapper in mappers)
+            foreach (var mapper in mappers.Where(m => m.IsPublic))
             {
-                var mapperObject = Activator.CreateInstance(mapper);
-                createMappingMethod.Invoke(mapperObject, new object[] { cfg });
+                var mapperObject = Activator.CreateInstance(mapper) as dynamic;
+
+                if (mapperObject is not null)
+                {
+                    mapperObject.CreateMap(cfg);
+                }
             }
         }
     }

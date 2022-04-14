@@ -22,8 +22,10 @@ namespace Supermarket.Web.Controllers.Shop
             return View();
         }
 
-        public async Task<IActionResult> ShopGrid(string categoryName)
+        public async Task<IActionResult> ShopGrid()
         {
+            var categoryName = Request.Query["category"];
+
             var products = await _productService.GetByCategoryNameAsync(categoryName);
 
             ViewBag.Products = products;

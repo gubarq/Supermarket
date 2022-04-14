@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using Supermarket.Core.Services.ActionServices;
+using Supermarket.Core.Services.ActionServices.Interfaces;
 using Supermarket.Core.Services.EntityServices;
 using Supermarket.Core.Services.EntityServices.Interfaces;
 using Supermarket.Core.Services.HostedServices;
@@ -34,10 +36,11 @@ builder.Services.AddIdentity<User, IdentityRole>(options => {
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
+builder.Services.AddScoped<IDtoMappingService, DtoMappingService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-
+builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddHostedService<SeedingService>();
 
 builder.Services.Configure<RazorViewEngineOptions>(options =>
@@ -81,20 +84,22 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-
-app.MapAreaControllerRoute(
-    name: "admin",
-    areaName: "Admin",
-    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
-
-app.MapAreaControllerRoute(
-    name: "default",
-    areaName: "Shop",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseMvc(config =>
+{
+    config.MapAreaRoute(
+        name: "default",
+        areaName: "Shop",
+        template: "{controller=Home}/{action=Index}/{id?}");
+    config.MapAreaRoute(
+        name: "identity",
+        areaName: "Identity",
+        template: "Identity/{controller=Home}/{action=Index}/{id?}");
+    config.MapAreaRoute(
+        name: "admin",
+        areaName: "Admin",
+        template: "Admin/{controller=Home}/{action=Index}/{id?}");
+    config.MapRoute("Api", "api/{controller}/{action}/{id?}");
+});
 
 app.MapRazorPages();
 

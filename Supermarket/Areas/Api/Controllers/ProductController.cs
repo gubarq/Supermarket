@@ -6,7 +6,6 @@ using Supermarket.Database.Entities;
 
 namespace Supermarket.Web.Areas.Api.Controllers
 {
-    [Route("/product")]
     public class ProductController : BaseApiController
     {
         protected IProductService _productService;
@@ -19,7 +18,7 @@ namespace Supermarket.Web.Areas.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/{categoryName}")]
+        [Route("/product/{categoryName}")]
         public async Task<IActionResult> GetProductsByCategoryName(string categoryName)
         {
             try
