@@ -18,12 +18,13 @@ namespace Supermarket.Web.Areas.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/product/{categoryName}")]
+        [Route("/api/product/{categoryName}")]
         public async Task<IActionResult> GetProductsByCategoryName(string categoryName)
         {
             try
             {
-                var products = await _productService.GetByCategoryNameAsync(categoryName);
+                var products = (categoryName == "all") ? await _productService.GetAllAsync() 
+                    : await _productService.GetByCategoryNameAsync(categoryName);
 
                 var productDtos = products.Select(p => _dtoMappingService.Map<Product, ProductResponseDto>(p));
 

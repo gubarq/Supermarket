@@ -24,12 +24,15 @@ namespace Supermarket.Web.Controllers.Shop
 
         public async Task<IActionResult> ShopGrid()
         {
-            var categoryName = Request.Query["category"];
+            ViewBag.Category = string.IsNullOrWhiteSpace(Request.Query["category"]) ? 
+                "All categories" : Request.Query["category"].ToString();
+            
+            
+            return View();
+        }
 
-            var products = await _productService.GetByCategoryNameAsync(categoryName);
-
-            ViewBag.Products = products;
-
+        public IActionResult Contact()
+        {
             return View();
         }
     }
