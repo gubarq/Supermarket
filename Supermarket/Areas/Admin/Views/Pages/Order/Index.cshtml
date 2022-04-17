@@ -9,6 +9,7 @@
             <td>Date</td>
             <td>Price</td>
             <td>User Email</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +18,10 @@
                 <tr>
                     <td>@order.OrderDate.ToShortDateString()</td>
                     <td>@order.TotalPrice</td>
-                    <td>@(order.UserId is null ? "anonymous" : @order.User.Email)</td>
+                    <td>@(order.UserId is null ? "anonymous" : order.User.Email)</td>
+                    <td>
+                        <a href="~/Admin/Order/Details/@(order.Id)" class="primary-btn" style="text-align:center;">Details</a>
+                    </td>
                 </tr>
             }
     </tbody>

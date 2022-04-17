@@ -1,4 +1,52 @@
-﻿@page
-@model Supermarket.Web.Areas.Admin.Views.Pages.Order.DetailsModel
+﻿@model Order
+
 @{
+    ViewData["Title"] = "Order Details";
 }
+
+
+<div class="form-group">
+    <label asp-for="@Model.User.Email">Ordered by</label>
+    <input asp-for="@Model.User.Email" type="text" class="form-control" value="@(Model.UserId is null ? "anonymous" : Model.User.Email)" disabled />    
+</div>
+
+<div class="form-group">
+    <label asp-for="@Model.OrderDate">Ordered at</label>
+    <input asp-for="@Model.OrderDate" type="text" class="form-control" value="@Model.OrderDate.ToShortDateString()" disabled />    
+</div>
+
+<div class="shoping__cart__table">
+    <table>
+        <thead>
+            <tr>
+                <th class="shoping__product">Products</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.Products)
+            {
+            <tr>
+                <td class="shoping__cart__item">
+                    <img src="@item.Product.ImageUrl" alt="" height="100" width="100" />
+                    <h5>@item.Product.Name</h5>
+                </td>
+                <td class="shoping__cart__price">
+                    $@(item.Product.Price.ToString("F2"))
+                </td>
+                <td class="shoping__cart__quantity">
+                    <div class="quantity">
+                    @item.Quantity
+                    </div>
+                </td>
+                <td class="shoping__cart__total">
+                    $@((item.Quantity * item.Product.Price).ToString("F2"))
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Supermarket.Core.Services.EntityServices.Interfaces;
 using Supermarket.Database.Entities;
 using Supermarket.Web.Controllers.Shop;
+using System.Security.Claims;
 
 namespace Supermarket.Web.Areas.Shop.Controllers
 {
@@ -11,12 +12,14 @@ namespace Supermarket.Web.Areas.Shop.Controllers
         private readonly IProductService _productService;
         private readonly IOrderService _orderService;
         private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public OrderController(IProductService productService, IOrderService orderService, UserManager<User> userManager)
+        public OrderController(IProductService productService, IOrderService orderService, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _productService = productService;
             _orderService = orderService;
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost]
@@ -39,8 +42,10 @@ namespace Supermarket.Web.Areas.Shop.Controllers
             }
 
             Response.Cookies.Delete("Cart");
+            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             await _orderService.PlaceOrderAsync(products, 
-                 _userManager.Users.FirstOrDefault(u => u.Id == Guid.Parse(_userManager.GetUserId(HttpContext.User))));
+                 _userManager.Users.FirstOrDefault(u => u.Id.ToString() == userId));
             return Redirect("/");
         }
 

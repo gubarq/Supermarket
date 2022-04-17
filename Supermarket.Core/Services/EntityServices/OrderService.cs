@@ -21,7 +21,9 @@ namespace Supermarket.Core.Services.EntityServices
 
         public override async Task<Order> GetByIdAsync(Guid id)
             => await _repository.GetQuery().Where(o => o.Id == id)
-            .Include(o => o.Products).Include(o => o.User).FirstOrDefaultAsync();
+            .Include(o => o.Products)
+            .ThenInclude(p => p.Product)
+            .Include(o => o.User).FirstOrDefaultAsync();
 
         public async Task PlaceOrderAsync(List<OrderProduct> products, User User)
         {
