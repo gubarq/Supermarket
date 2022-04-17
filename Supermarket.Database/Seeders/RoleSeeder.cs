@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Supermarket.Database.Entities;
 using Supermarket.Database.Seeders.Interfaces;
 using Supermarket.Database.Seeders.Models;
 using System.Text.Json;
@@ -11,7 +12,7 @@ namespace Supermarket.Database.Seeders
         public async Task SeedAsync(IServiceScope scope)
         {
             using var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            using var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            using var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
 
             var json = await File.ReadAllTextAsync($"{AppContext.BaseDirectory}/SeedData/roles.json");
             var roles = JsonSerializer.Deserialize<List<RoleSeedingModel>>(json);

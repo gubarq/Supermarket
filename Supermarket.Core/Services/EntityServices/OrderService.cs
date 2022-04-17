@@ -16,17 +16,21 @@ namespace Supermarket.Core.Services.EntityServices
         {
         }
 
+        public override async Task<IEnumerable<Order>> GetAllAsync()
+            => await _repository.GetQuery().Include(o => o.User).ToListAsync();
 
         public override async Task<Order> GetByIdAsync(Guid id)
-            => await _repository.GetQuery().Where(o => o.Id == id).Include(o => o.Products).FirstOrDefaultAsync();
+            => await _repository.GetQuery().Where(o => o.Id == id)
+            .Include(o => o.Products).Include(o => o.User).FirstOrDefaultAsync();
 
-        public async Task PlaceOrderAsync(List<OrderProduct> products)
+        public async Task PlaceOrderAsync(List<OrderProduct> products, User User)
         {
             var order = new Order()
             {
                 OrderDate = DateTime.UtcNow,
                 Products = products,
-                TotalPrice = products.Select(p => p.Quantity * p.Product.Price).Aggregate((a, b) => a + b)
+                TotalPrice = products.Select(p => p.Quantity * p.Product.Price).Aggregate((a, b) => a + b),
+                User = User
             };
 
             await _repository.CreateOrUpdateAsync(order);

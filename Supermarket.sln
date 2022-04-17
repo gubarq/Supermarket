@@ -5,11 +5,11 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Web", "Supermarket\Supermarket.Web.csproj", "{8AC13170-EE39-4386-9FF2-E7D6E23BAEC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Database", "Supermarket.Database\Supermarket.Database.csproj", "{E98EFBFA-F8E6-41D4-BF1B-494716DB6BDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Database", "Supermarket.Database\Supermarket.Database.csproj", "{E98EFBFA-F8E6-41D4-BF1B-494716DB6BDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Core", "Supermarket.Core\Supermarket.Core.csproj", "{BF226F82-1B40-4B13-8069-27FE6B362552}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Core", "Supermarket.Core\Supermarket.Core.csproj", "{BF226F82-1B40-4B13-8069-27FE6B362552}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Shared", "Supermarket.Shared\Supermarket.Shared.csproj", "{65F9B2DF-84CA-4A53-AB85-2107A7D9B425}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Shared", "Supermarket.Shared\Supermarket.Shared.csproj", "{65F9B2DF-84CA-4A53-AB85-2107A7D9B425}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

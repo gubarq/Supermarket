@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Supermarket.Core.Services.EntityServices.Interfaces;
 using Supermarket.Database.Entities;
 using Supermarket.Web.Controllers.Shop;
@@ -9,11 +10,13 @@ namespace Supermarket.Web.Areas.Shop.Controllers
     {
         private readonly IProductService _productService;
         private readonly IOrderService _orderService;
+        private readonly UserManager<User> _userManager;
 
-        public OrderController(IProductService productService, IOrderService orderService)
+        public OrderController(IProductService productService, IOrderService orderService, UserManager<User> userManager)
         {
             _productService = productService;
             _orderService = orderService;
+            _userManager = userManager;
         }
 
         [HttpPost]
@@ -31,11 +34,13 @@ namespace Supermarket.Web.Areas.Shop.Controllers
                 {
                     ProductId = product.Id,
                     Product = product,
-                    Quantity = key.Value
+                    Quantity = key.Value,
                 });
             }
 
-            await _orderService.PlaceOrderAsync(products);
+            Response.Cookies.Delete("Cart");
+            await _orderService.PlaceOrderAsync(products, 
+                 _userManager.Users.FirstOrDefault(u => u.Id == Guid.Parse(_userManager.GetUserId(HttpContext.User))));
             return Redirect("/");
         }
 
