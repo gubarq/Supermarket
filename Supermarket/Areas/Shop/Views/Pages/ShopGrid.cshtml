@@ -1,8 +1,4 @@
-﻿<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-<!-- Breadcrumb Section Begin -->
+﻿<!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" >
     <div class="container" style = "background-image: url('../img/breadcrumb.jpg'); padding-top: 100px; padding-bottom: 100px; background-repeat: no-repeat; background-position: center; background-size: cover; max-width: 100%;" >
         <div class="row">
@@ -36,7 +32,25 @@
             const products = await fetch("@(Context.Request.Scheme)://@(Context.Request.Host)/api/product/@(string.IsNullOrEmpty(Context.Request.Query["category"]) ? "all" : Context.Request.Query["category"])").then(res => res.json())
             console.log(products)
             const productContainer = document.querySelector("#products")
-            const productHtml = products.map((e) => `<div class="col-lg-4 col-md-6 col-sm-6"><div class="product__item"><div class="product__item__pic set-bg" style="background-image: url(${e.imageUrl})"><ul class="product__item__pic__hover"><li><a href="#"><i class="fa fa-shopping-cart"></i></a></li></ul></div><div class="product__item__text"><h6><a href="#">${e.name}</a></h6><h5>$ ${e.price.toFixed(2)}</h5></div></div></div>`).join('')
+            const productHtml = products.map((e) => `<div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item">
+                <div class="product__item__pic set-bg" 
+                    style="background-image: url(${e.imageUrl})">
+                    <ul class="product__item__pic__hover">
+                        <li>
+                            <a href="">
+                                <i class="fa fa-shopping-cart"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            <div class="product__item__text">
+                <h6>
+                    <a href="@(Context.Request.Scheme)://@(Context.Request.Host)/Home/ProductDetail/${e.id}">
+                        ${e.name}
+                    </a>
+                </h6>
+            <h5>$ ${e.price.toFixed(2)}</h5></div></div></div>`).join('')
             productContainer.innerHTML = productHtml;
         })()
     

@@ -39,6 +39,7 @@ builder.Services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
 builder.Services.AddScoped<IDtoMappingService, DtoMappingService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddHostedService<SeedingService>();

@@ -76,7 +76,7 @@
                             <li><a href="~/Home/Contact">Contact</a></li>
                             @if (User.IsInRole("Admin"))
                             {
-                             <li><a href="~/Admin">Admin</a></li>
+                             <li><a href="~/Admin/Product">Admin</a></li>
                             }
                         </ul>
                     </nav>
@@ -85,9 +85,9 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> </a></li>
+                            <li><a href="~/Home/Cart"><i class="fa fa-shopping-bag"></i> </a></li>
                         </ul>
-                        <div class="header__cart__price">Cart: <span>цена на количка!</span></div>
+                        <div class="header__cart__price">Cart: <span id="cartPrice"></span></div>
                     </div>
                 </div>
             </div>
@@ -99,6 +99,11 @@
     <!-- Header Section End -->
     
     <main>
+        
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
+
         @RenderBody();
     </main>
 
@@ -146,6 +151,15 @@
     <script src="~/js/mixitup.min.js"></script>
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/main.js"></script>
+    <script>
+    (async() => {
+        const totalDto = await fetch("@(Context.Request.Scheme)://@(Context.Request.Host)/api/cartprice").then(res => res.json())
+        const cartTotal = document.querySelector("#cartPrice");
+
+        cartTotal.innerHTML = "$ " + totalDto.total.toFixed(2);
+    
+    })()
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     @await RenderSectionAsync("Scripts", false)
 </body>

@@ -31,6 +31,6 @@ namespace Supermarket.Database.Entities
         [StringLength(500)]
         public string Description { get; set; }
 
-        public virtual List<Order> Orders { get; set; }
+        public virtual List<OrderProduct> Orders { get; set; }
     }
 }

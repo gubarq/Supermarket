@@ -1,29 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Product list";
-    List<Product> products = ViewBag.Products;
+    ViewData["Title"] = "Order list";
+    List<Order> orders = ViewBag.Orders;
 }
-
-<a href="~/Admin/Product/Create" class="primary-btn w-100" style="margin-bottom:2em; text-align:center;">Create a new product</a>
 
 <table id="table" class="table">
     <thead>
         <tr>
-            <td></td>
-            <td>Category</td>
-            <td>Name</td>
-            <td>Quantity</td>
+            <td>Date</td>
             <td>Price</td>
+            <td>User Email</td>
         </tr>
     </thead>
     <tbody>
-            @foreach(var product in products)
+            @foreach(var order in orders)
             {
                 <tr>
-                    <td><img src="@product.ImageUrl" height="50" width="50"/></td>
-                    <td>@product.Category</td>
-                    <td>@product.Name</td>
-                    <td>@product.Quantity</td>
-                    <td>@product.Price</td>
+                    <td>@order.OrderDate.ToShortDateString()</td>
+                    <td>@order.TotalPrice</td>
+                    <td>@(order.UserId is null ? "anonymous" : @order.User.Email)</td>
                 </tr>
             }
     </tbody>

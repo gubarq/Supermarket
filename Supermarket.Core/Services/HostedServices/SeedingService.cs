@@ -10,7 +10,7 @@ namespace Supermarket.Core.Services.HostedServices
     public class SeedingService : IHostedService
     {
         protected IServiceProvider _serviceProvider { get; set; }
-        protected List<ISeeder> seeders = new() { new RoleSeeder(), new UserSeeder()};
+        protected List<ISeeder> seeders = new() { new RoleSeeder(), new UserSeeder(), new CategorySeeder()};
 
         public SeedingService(IServiceProvider provider)
         {

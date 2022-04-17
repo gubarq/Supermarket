@@ -35,8 +35,5 @@ namespace Supermarket.Web.Areas.Api.Controllers
                 return BadRequest();
             }
         }
-
-
-
     }
 }

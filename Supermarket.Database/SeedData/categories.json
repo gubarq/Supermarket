@@ -1,0 +1,37 @@
+[
+  {
+    "Name": "Fruit",
+    "ImageUrl": "https://www.collinsdictionary.com/images/full/fruit_163436567.jpg",
+    "IsFeatured": true
+  },
+  {
+    "Name": "Vegetables",
+    "ImageUrl": "https://www.vegan.io/blog/assets/10-healthiest-vegetables-to-include-in-your-vegan-diet-2018-04-16/healthiest-vegetables-df1cf550711076d052eaade12c38289a2637c38e546182d3c0136a90cb0bb0b3.jpg",
+    "IsFeatured": true
+  },
+  {
+    "Name": "Meat",
+    "ImageUrl": "https://www.incimages.com/uploaded_files/image/1024x576/getty_80116649_344560.jpg",
+    "IsFeatured": true
+  },
+  {
+    "Name": "Dairy",
+    "ImageUrl": "https://www.dairyreporter.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/dairyreporter.com/news/retail-shopper-insights/pandemic-leads-to-more-consumption-of-dairy-products/12201507-1-eng-GB/Pandemic-leads-to-more-consumption-of-dairy-products.jpg",
+    "IsFeatured": true
+  },
+  {
+    "Name": "Nuts",
+    "ImageUrl": "https://www.forestwholefoods.co.uk/wp-content/uploads/2017/04/Organic-Delux-Mixed-Nuts-1500px.jpg",
+    "IsFeatured": true
+  },
+  {
+    "Name": "Pastry",
+    "ImageUrl": "http://www.cornishpastyassociation.co.uk/wp-content/uploads/2016/01/pasty.jpg",
+    "IsFeatured": true
+  },
+  {
+    "Name": "Eggs",
+    "ImageUrl": "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-eggs.jpg",
+    "IsFeatured": false
+  }
+]

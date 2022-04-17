@@ -17,10 +17,10 @@ namespace Supermarket.Database.Entities
         [Column(TypeName = "money")]
         public decimal TotalPrice { get; set; }
 
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
 
         public virtual User User { get; set; }
 
-        public virtual List<Product> Products { get; set; }
+        public virtual List<OrderProduct> Products { get; set; }
     }
 }

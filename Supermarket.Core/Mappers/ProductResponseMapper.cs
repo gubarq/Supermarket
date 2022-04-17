@@ -11,7 +11,8 @@ namespace Supermarket.Core.Mappers
         {
             cfg.CreateMap<Product, ProductResponseDto>()
                 .ForMember(d => d.LowQuantity, o => o.MapFrom(s => s.Quantity <= 10))
-                .ForMember(d => d.Quantity, o => o.MapFrom(s => s.Quantity <= 10 ? s.Quantity : -1));
+                .ForMember(d => d.Quantity, o => o.MapFrom(s => s.Quantity <= 10 ? s.Quantity : -1))
+                .ForMember(d => d.Id, o => o.MapFrom(s => s.Id.ToString()));
         }
     }
 }
