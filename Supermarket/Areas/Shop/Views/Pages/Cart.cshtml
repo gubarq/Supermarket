@@ -52,8 +52,8 @@
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>
                     <ul>
-                        <li>Subtotal <span>$@Model.Subtotal.ToString("F2")</span></li>
-                        <li>Total <span>$@Model.Total.ToString("F2")</span></li>
+                        <li>Subtotal <span>$@(Model.Items.Count > 0 ? Model.Subtotal.ToString("F2") : "0.00")</span></li>
+                        <li>Total <span>$@(Model.Items.Count > 0 ? Model.Total.ToString("F2") : "0.00")</span></li>
                     </ul>
                     <form method="POST" action="~/Order/PlaceOrder">
                         <button type="submit" class="primary-btn">Place order</button>
